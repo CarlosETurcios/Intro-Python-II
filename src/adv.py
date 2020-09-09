@@ -18,7 +18,10 @@ to north. The smell of gold permeates the air."""),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers.The only exit is to the south. """),
+    'death_trap': Room('Hidden Death Trap',
+                       """East of the narrows there's a cave. 
+    Inside the cave there are hidden traps!"""),
 }
 
 
@@ -32,12 +35,21 @@ room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
+room['narrow'].e_to = room['death_trap']
+room['death_trap'].w_to = room['narrow']
 
 #
 # Main
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player = Player(room['outside'])
+
+user_input = str(
+    input("[n] Move North [s] Move South [e] Move East [w] Move West [q] Quit\n"))
+
+while not user_input == 'q':
+    print(player.location.name)
 
 # Write a loop that:
 #
