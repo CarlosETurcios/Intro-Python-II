@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -18,9 +19,10 @@ to north. The smell of gold permeates the air."""),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
+
 earlier adventurers.The only exit is to the south. """),
     'death_trap': Room('Hidden Death Trap',
-                       """East of the narrows there's a cave. 
+                       """East of the narrows there's a cave.
     Inside the cave there are hidden traps!"""),
 }
 
@@ -49,7 +51,34 @@ user_input = str(
     input("[n] Move North [s] Move South [e] Move East [w] Move West [q] Quit\n"))
 
 while not user_input == 'q':
+
+    if user_input == 'n':
+        if hasattr(player.location, 'n_to'):
+            player.location = player.location.n_to
+        else:
+            print("No access")
+    elif user_input == 'e':
+        if hasattr(player.location, 'e_to'):
+            player.location = player.location.e_to
+        else:
+            print("no access")
+    elif user_input == 'w':
+        if hasattr(player.location, 'w_to'):
+            player.location = player.location.w_to
+        else:
+            print("no access")
+
+    elif user_input == 's':
+        if hasattr(player.location, 's_to'):
+            player.location = player.location.s_to
+        else:
+            print("no access ")
+
     print(player.location.name)
+    print(player.location.description)
+
+    user_input = str(
+        input("[n] Move North [s] Move South [e] Move East [w] Move West [q] Quit\n"))
 
 # Write a loop that:
 #
